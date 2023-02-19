@@ -1,0 +1,16 @@
+services:
+    palm-dev-env:
+        image: palm-dev-env
+        container_name: palm-dev-env
+        hostname: palm
+        tty: true
+        build:
+            context: .
+            dockerfile: Dockerfile
+        volumes:
+            - type: bind
+              source: ./sources/
+              target: /home/devel/sources
+            - /tmp/.X11-unix:/tmp/.X11-unix
+        environment:
+            - DISPLAY=${DISPLAY}
