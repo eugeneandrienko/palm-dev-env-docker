@@ -18,7 +18,8 @@ ENV TZ=Europe/Moscow
 
 # Install supplementary packages:
 # For uARM:
-RUN apt-get install -y git \
+RUN apt-get install -y dosfstools \
+                       git \
                        build-essential \
                        libsdl2-dev \
                        x11-xserver-utils \
@@ -49,8 +50,14 @@ RUN mkdir os_images && \
 
 # Create directory for sources:
 WORKDIR /home/devel
-RUN mkdir sources
+RUN mkdir sources sdcard
 VOLUME /home/devel/sources
+VOLUME /home/devel/sdcard
+
+# Copying necessary scripts:
+RUN mkdir /home/devel/bin && \
+    echo 'PATH="$PATH":/home/devel/bin' >> ~/.bashrc
+COPY ./scripts/uARM.sh /home/devel/bin
 
 # Clear:
 USER root
