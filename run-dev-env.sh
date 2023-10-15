@@ -21,6 +21,13 @@ if [ "$?" -ne 0 ]; then
     docker compose up --detach
 fi
 
+echo
+echo    "*******************************************************************"
+echo    "Aliases:"
+echo -e "\temulator\tRun emulator with mounted SD card"
+echo    "*******************************************************************"
+echo
+
 # Go to container
 docker exec -it palm-dev-env /bin/bash
 

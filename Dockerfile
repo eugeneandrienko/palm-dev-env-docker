@@ -38,7 +38,7 @@ RUN git clone https://github.com/uARM-Palm/uARM.git 2>&1 && \
             -e 's/^#(DEVICE\t+\+= .+TungstenE2.+)/\1/g' Makefile && \
     make && \
     echo "PATH+=$PATH:/home/devel/dev_env/uARM" >> ~/.bashrc && \
-    echo "alias emulator='uARM -r ~/os_images/Palm-Tungsten-E2-nor.bin -n ~/os_images/Palm-Tungsten-E2-nand.bin'" >> ~/.bashrc
+    echo "alias emulator='uARM -r ~/os_images/Palm-Tungsten-E2-nor.bin -n ~/os_images/Palm-Tungsten-E2-nand.bin -s ~/sdcard.bin'" >> ~/.bashrc
 # Download images for Palm Tungsten E2:
 WORKDIR /home/devel
 RUN mkdir os_images && \
@@ -53,11 +53,6 @@ WORKDIR /home/devel
 RUN mkdir sources sdcard
 VOLUME /home/devel/sources
 VOLUME /home/devel/sdcard
-
-# Copying necessary scripts:
-RUN mkdir /home/devel/bin && \
-    echo 'PATH="$PATH":/home/devel/bin' >> ~/.bashrc
-COPY ./scripts/uARM.sh /home/devel/bin
 
 # Clear:
 USER root
