@@ -17,13 +17,15 @@ ENV TZ=Europe/Moscow
 ################################################################################
 
 # Install supplementary packages:
-# For uARM:
 RUN apt-get install -y dosfstools \
                        git \
                        build-essential \
                        libsdl2-dev \
                        x11-xserver-utils \
                        wget
+
+# Setup root password:
+RUN sed -ri 's/root:\*:(.*)/root::\1/g' /etc/shadow
 
 ################################################################################
 
