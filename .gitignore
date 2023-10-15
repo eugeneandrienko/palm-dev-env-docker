@@ -1,4 +1,5 @@
 sources/*
 sdcard/*
+jdk*.bin
 sdcard.bin
-
+sun*.bin

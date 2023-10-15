@@ -21,8 +21,36 @@ RUN apt-get install -y dosfstools \
                        git \
                        build-essential \
                        libsdl2-dev \
+                       vim \
                        x11-xserver-utils \
                        wget
+
+#
+# Install JDK6 and WTK:
+#
+RUN apt-get install -y ed \
+                       g++-multilib \
+                       gcc-multilib
+ENV JDK=jdk-1_5_0_22-linux-i586.bin
+ENV WTK=sun_java_wireless_toolkit-2.5.2_01-linuxi486.bin
+COPY ./$JDK ./$WTK ./scripts/hack-jdk-installer.sh ./scripts/hack-wtk-installer.sh /usr/
+# Install JDK 1.5:
+RUN chmod u+x /usr/$JDK /usr/hack-jdk-installer.sh && \
+    /usr/hack-jdk-installer.sh /usr/$JDK && \
+    cd /usr && /usr/$JDK && \
+    echo 'PATH=$PATH:/usr/jdk1.5.0_22/bin' >> /home/devel/.bashrc && \
+    echo 'PATH=$PATH:/usr/jdk1.5.0_22/bin' >> /root/.bashrc
+# Install WTK 2.5.2_01:
+ENV PATH="${PATH}:/usr/jdk1.5.0_22/bin"
+RUN chmod u+x /usr/$WTK /usr/hack-wtk-installer.sh && \
+    /usr/hack-wtk-installer.sh /usr/$WTK && \
+    cd /usr && /usr/$WTK && \
+    mv /usr/0 /usr/WTK2.5.2 && \
+    echo 'PATH=$PATH:/usr/WTK2.5.2/bin' >> /home/devel/.bashrc
+# Install additional libraries for WTK:
+RUN dpkg --add-architecture i386 && \
+    apt-get update && \
+    apt-get install -y libxext6:i386
 
 # Setup root password:
 RUN sed -ri 's/root:\*:(.*)/root::\1/g' /etc/shadow
@@ -39,7 +67,7 @@ RUN git clone https://github.com/uARM-Palm/uARM.git 2>&1 && \
     sed -ri -e 's/(^DEVICE\t+\+=.+)/#\1/g' \
             -e 's/^#(DEVICE\t+\+= .+TungstenE2.+)/\1/g' Makefile && \
     make && \
-    echo "PATH+=$PATH:/home/devel/dev_env/uARM" >> ~/.bashrc && \
+    echo 'PATH+=$PATH:/home/devel/dev_env/uARM' >> ~/.bashrc && \
     echo "alias emulator='uARM -r ~/os_images/Palm-Tungsten-E2-nor.bin -n ~/os_images/Palm-Tungsten-E2-nand.bin -s ~/sdcard.bin'" >> ~/.bashrc
 # Download images for Palm Tungsten E2:
 WORKDIR /home/devel

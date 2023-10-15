@@ -25,6 +25,11 @@ echo
 echo    "*******************************************************************"
 echo    "Aliases:"
 echo -e "\temulator\tRun emulator with mounted SD card"
+echo
+echo    "Installed programming tools:"
+echo -e "\tjava"
+echo -e "\tjavac"
+echo -e "\tktoolbar"
 echo    "*******************************************************************"
 echo
 
