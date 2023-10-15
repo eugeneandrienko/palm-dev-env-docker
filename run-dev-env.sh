@@ -22,6 +22,5 @@ if [ "$?" -ne 0 ]; then
 fi
 
 # Go to container
-docker cp ./sdcard.bin palm-dev-env:/home/devel/
 docker exec -it palm-dev-env /bin/bash
 

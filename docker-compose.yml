@@ -14,6 +14,9 @@ services:
             - type: bind
               source: ./sdcard/
               target: /home/devel/sdcard
+            - type: bind
+              source: ./sdcard.bin
+              target: /home/devel/sdcard.bin
             - /tmp/.X11-unix:/tmp/.X11-unix
         environment:
             - DISPLAY=${DISPLAY}
