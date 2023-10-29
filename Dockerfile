@@ -50,7 +50,7 @@ RUN chmod u+x /usr/$WTK /usr/hack-wtk-installer.sh && \
 # Install additional libraries for WTK:
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
-    apt-get install -y libxext6:i386
+    apt-get install -y libxext6:i386 libxt6:i386
 
 # Setup root password:
 RUN sed -ri 's/root:\*:(.*)/root::\1/g' /etc/shadow
@@ -80,9 +80,10 @@ RUN mkdir os_images && \
 
 # Create directory for sources:
 WORKDIR /home/devel
-RUN mkdir sources sdcard
+RUN mkdir sources sdcard j2mewtk
 VOLUME /home/devel/sources
 VOLUME /home/devel/sdcard
+VOLUME /home/devel/j2mewtk
 
 # Clear:
 USER root

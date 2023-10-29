@@ -1,5 +1,6 @@
-sources/*
+j2mewtk/*
 sdcard/*
+sources/*
 jdk*.bin
 sdcard.bin
 sun*.bin
