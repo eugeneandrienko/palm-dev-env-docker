@@ -51,6 +51,11 @@ RUN chmod u+x /usr/$WTK /usr/hack-wtk-installer.sh && \
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
     apt-get install -y libxext6:i386 libxt6:i386
+# Install jar2prc:
+RUN apt-get install -y wine32 && \
+    mkdir /home/devel/jar2prc && \
+    echo "alias jar2prc='wine /home/devel/jar2prc/bin/jartoprc.exe'" >> /home/devel/.bashrc
+VOLUME /home/devel/jar2prc
 
 # Setup root password:
 RUN sed -ri 's/root:\*:(.*)/root::\1/g' /etc/shadow

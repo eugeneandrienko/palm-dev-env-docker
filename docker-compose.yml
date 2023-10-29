@@ -20,6 +20,9 @@ services:
             - type: bind
               source: ./sdcard.bin
               target: /home/devel/sdcard.bin
+            - type: bind
+              source: ./jar2prc
+              target: /home/devel/jar2prc
             - /tmp/.X11-unix:/tmp/.X11-unix
         environment:
             - DISPLAY=${DISPLAY}
