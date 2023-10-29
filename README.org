@@ -1,0 +1,57 @@
+There is a special Docker image for developing on Java for Palm OS (v5).
+
+Image based on:
+- Java 1.5
+- Sun Java Wireless Toolkit (WTK) 2.5.2-01
+
+* How to use
+** Manually install some files
+Some files should be added to cloned repository by hand:
+- JDK 1.5 for Linux (i586). Filename should be:
+  =jdk-1_5_0_22-linux-i586.bin=. This file should be copied to the root of
+  git-repository. MD5SUM should be: =df5dae6d50d2abeafb472dde6d9a17f3=.
+- Sun Java Wireless Toolkit. Filename:
+  =sun_java_wireless_toolkit-2.5.2_01-linuxi486.bin=. It should be compiled to
+  the root of repository. MD5SUM should be:
+  =6b70b6e6d426eac121db8a087991589f=. If md5sum differs — then byte-patching of
+  install package will fail! This action necessary to automatically accept
+  license and install files without any input from user.
+- =jartoprc= files should be extracted from [[https://palmdb.net/app/jvm][this archive]] and copied into
+  =jar2prc/= catalog. Expected result:
+  #+begin_src
+  jar2prc/
+  ├── bin
+  └── lib
+      └── jclFoundation10
+  #+end_src
+** Build docker image
+#+begin_src
+  docker compose build
+#+end_src
+** Start container
+#+begin_src
+  ./run-dev-env.sh
+#+end_src
+** Stop container
+#+begin_src
+  ./stop-dev-env.sh
+#+end_src
+
+* Special mounted catalogs
+Some catalogs will be mounted from root directory in cloned git-repository to
+=/home/devel/= catalog inside docker container.
+- =j2mewtk= :: WTK projects will be stored in this catalog
+- =sdcard= :: SD-card attached to Palm emulator will be mounted here
+- =sources= :: Catalog for different sources
+
+* Which programs installed to docker container
+- [[https://github.com/uARM-Palm/uARM][uARM]] :: Palm (v5) emulator from Dmitry Grindberg. There is alias =emulator= to
+  run uARM with Palm Tungsten E2 image (downloaded and installed when image
+  was built).
+- ktoolbar :: project builder for WTK. JAR files should be built here.
+- jar2prc :: Windows program to convert JAR to PRC (program file format for
+  Palm). Running via wine32.
+
+* Where to find JVM for Palm?
+There are =PRC= files in [[https://palmdb.net/app/jvm][this archive]]. Files' description can be found also in
+that archive.
