@@ -83,8 +83,11 @@ RUN mkdir os_images && \
 
 ################################################################################
 
+# Fixes for Java GUI to render it properly:
+RUN echo "export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.defaultlaf=com.sun.java.swing.plaf.gtk.GTKLookAndFeel'" >> ~/.bashrc && \
+    echo "export GDK_SCALE=2" >> ~/.bashrc && \
+    echo "export GDK_DPI_SCALE=0.5" >> ~/.bashrc
 # Create directory for sources:
-WORKDIR /home/devel
 RUN mkdir sources sdcard j2mewtk
 VOLUME /home/devel/sources
 VOLUME /home/devel/sdcard
