@@ -2,6 +2,7 @@ j2mewtk/*
 jar2prc/*
 sdcard/*
 sources/*
+workspace/*
 jdk*.bin
 sdcard.bin
 sun*.bin

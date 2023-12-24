@@ -23,6 +23,9 @@ services:
             - type: bind
               source: ./jar2prc
               target: /home/devel/jar2prc
+            - type: bind
+              source: ./workspace
+              target: /home/devel/workspace
             - /tmp/.X11-unix:/tmp/.X11-unix
         environment:
             - DISPLAY=${DISPLAY}

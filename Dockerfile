@@ -56,6 +56,14 @@ RUN apt-get install -y wine32 && \
     mkdir /home/devel/jar2prc && \
     echo "alias jar2prc='wine /home/devel/jar2prc/bin/jartoprc.exe'" >> /home/devel/.bashrc
 VOLUME /home/devel/jar2prc
+# Install Eclipse Pulsar:
+RUN apt install -y libgtk2.0-0:i386 libxtst6:i386 && \
+    wget -O pulsar.tar.gz -c https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/helios/SR1/eclipse-pulsar-helios-SR1-linux-gtk.tar.gz && \
+#   wget -O pulsar.tar.gz -c https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/helios/SR1/eclipse-pulsar-helios-SR1-linux-gtk-x86_64.tar.gz && \
+    tar zxvf ./pulsar.tar.gz -C /home/devel && \
+    rm -f ./pulsar.tar.gz && \
+    chown -R devel:devel /home/devel/eclipse && \
+    echo "alias eclipse='/home/devel/eclipse/eclipse'" >> /home/devel/.bashrc
 
 # Setup root password:
 RUN sed -ri 's/root:\*:(.*)/root::\1/g' /etc/shadow
@@ -89,9 +97,11 @@ RUN echo "export _JAVA_OPTIONS='-Dawt.useSystemAAFontSettings=lcd -Dswing.defaul
     echo "export GDK_DPI_SCALE=0.5" >> ~/.bashrc
 # Create directory for sources:
 RUN mkdir sources sdcard j2mewtk
+# Save next catalogs between container restarts:
 VOLUME /home/devel/sources
 VOLUME /home/devel/sdcard
 VOLUME /home/devel/j2mewtk
+VOLUME /home/devel/workspace
 
 # Clear:
 USER root

@@ -31,6 +31,7 @@ echo -e "\tjava"
 echo -e "\tjavac"
 echo -e "\tktoolbar"
 echo -e "\tjar2prc"
+echo -e "\teclipse"
 echo    "*******************************************************************"
 echo
 
