@@ -40,10 +40,10 @@ Some files should be added to cloned repository by hand:
 * Special mounted catalogs
 Some catalogs will be mounted from root directory in cloned git-repository to
 =/home/devel/= catalog inside docker container.
-- =j2mewtk= :: WTK projects will be stored in this catalog
+- j2mewtk :: WTK projects will be stored in this catalog
 - jar2prc :: =jartoprc= Windows application
-- =sdcard= :: SD-card attached to Palm emulator will be mounted here
-- =sources= :: Catalog for different sources
+- sdcard :: SD-card attached to Palm emulator will be mounted here
+- sources :: Catalog for different sources
 - workspace :: Eclipse settings and project
 
 * Which programs installed to docker container
@@ -57,4 +57,4 @@ Some catalogs will be mounted from root directory in cloned git-repository to
 
 * Where to find JVM for Palm?
 There are =PRC= files in [[https://palmdb.net/app/jvm][this archive]]. Files' description can be found also in
-that archive.
+this archive.
