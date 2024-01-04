@@ -46,7 +46,8 @@ RUN chmod u+x /usr/$WTK /usr/hack-wtk-installer.sh && \
     /usr/hack-wtk-installer.sh /usr/$WTK && \
     cd /usr && /usr/$WTK && \
     mv /usr/0 /usr/WTK2.5.2 && \
-    echo 'PATH=$PATH:/usr/WTK2.5.2/bin' >> /home/devel/.bashrc
+    echo 'PATH=$PATH:/usr/WTK2.5.2/bin' >> /home/devel/.bashrc && \
+    echo 'MIDP_HOME=/usr/WTK2.5.2' >> /home/devel/.bashrc
 # Install additional libraries for WTK:
 RUN dpkg --add-architecture i386 && \
     apt-get update && \
